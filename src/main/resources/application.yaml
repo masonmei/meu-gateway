@@ -1,0 +1,143 @@
+server:
+  port: 8888
+  compression:
+    enabled: true
+    min-response-size: 1024
+    mime-types:
+      - application/json
+      - application/xml
+      - application/xhtml+xml
+      - text/html
+      - text/xml
+      - text/plain
+project:
+  info:
+    contact: meidongxu@baidu.com
+    version: 0.0.1
+    department: oped
+    description: Gateway application of meu.
+  uuap:
+    app-service-home: http://localhost:8888/
+    cas-service-url: http://localhost:8888/login
+    cas-url-prefix: http://itebeta.baidu.com:8100/
+    cas-url-login: http://itebeta.baidu.com:8100/login
+    cas-url-logout: http://itebeta.baidu.com:8100/logout
+  user-project-info: http://localhost:8888/users
+  conf-man-url: http://localhost:8878
+  service-man-url: http://localhost:8868
+  policy-status-url: http://localhost:8858
+  incident-url: http://localhost:8848
+  data-service-url: http://localhost:8838
+
+custom:
+  boot:
+    i18n:
+      enabled: true
+    trace:
+      enabled: true
+    spring:
+      fox:
+        enabled: true
+        patterns:
+          - /**
+        api-info:
+          title: meu-gateway
+spring:
+  redis:
+    host: localhost
+#    password:
+    port: 6379
+    timeout: 1000
+  aop:
+    proxy-target-class: true
+  mvc:
+    throw-exception-if-no-handler-found: true
+  resources:
+    add-mappings: false
+  jackson:
+    serialization-inclusion: non_null
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: false
+zuul:
+  retryable: true
+  routes:
+    alert-policy:
+      id: alert-event-info
+      path: /api/v1/products/*/apps/*/policies/**
+      url: ${project.policy-status-url}/v1/products/
+    alert-incident:
+      id: alert-incident
+      path: /api/v1/products/*/apps/*/incidents/**
+      url: ${project.incident-url}/v1/products/
+    data-service-metric-meta:
+      id: data-service-metric-meta
+      path: /api/v1/products/*/namespaces/*/metrics/*/_meta/**
+      url: ${project.data-service-url}/v1/products/
+    data-service-namespace-meta:
+      id: data-service-namespace-meta
+      path: /api/v1/products/*/namespaces/*/_meta/**
+      url: ${project.data-service-url}/v1/products/
+    data-service-product-meta:
+      id: data-service-product-meta
+      path: /api/v1/products/*/_meta/**
+      url: ${project.data-service-url}/v1/products/
+    data-service-data:
+      id: data-service-data
+      path: /api/v1/products/*/namespaces/*/metrics/*/_ts/**
+      url: ${project.data-service-url}/v1/products/
+    conf-groups:
+      id: conf-groups
+      path: /api/v1/products/*/groups/**
+      url: ${project.conf-man-url}/v1/products/
+    conf-callbacks:
+      id: conf-callbacks
+      path: /api/v1/products/*/callbacks/**
+      url: ${project.conf-man-url}/v1/products/
+    conf-aggrTasks:
+      id: conf-aggrTasks
+      path: /api/v1/products/*/apps/*/aggrTasks/**
+      url: ${project.conf-man-url}/v1/products/
+    conf-actions:
+      id: conf-actions
+      path: /api/v1/products/*/apps/*/actions/**
+      url: ${project.conf-man-url}/v1/products/
+    conf-policies:
+      id: conf-policies
+      path: /api/v1/products/*/apps/*/policies/**
+      url: ${project.conf-man-url}/v1/products/
+    conf-auditHistories:
+      id: conf-auditHistories
+      path: /api/v1/products/*/apps/*/auditHistories/**
+      url: ${project.conf-man-url}/v1/products/
+    conf-derivedTasks:
+      id: conf-derivedTasks
+      path: /api/v1/products/*/apps/*/derivedTasks/**
+      url: ${project.conf-man-url}/v1/products/
+    conf-execCollectTasks:
+      id: conf-execCollectTasks
+      path: /api/v1/products/*/apps/*/execCollectTasks/**
+      url: ${project.conf-man-url}/v1/products/
+    conf-logCollectTasks:
+      id: conf-logCollectTasks
+      path: /api/v1/products/*/apps/*/logCollectTasks/**
+      url: ${project.conf-man-url}/v1/products/
+    conf-patrolCollectTasks:
+      id: conf-patrolCollectTasks
+      path: /api/v1/products/*/apps/*/patrolCollectTasks/**
+      url: ${project.conf-man-url}/v1/products/
+    conf-processCollectTasks:
+      id: conf-processCollectTasks
+      path: /api/v1/products/*/apps/*/processCollectTasks/**
+      url: ${project.conf-man-url}/v1/products/
+    conf-metrics:
+      id: conf-metrics
+      path: /api/v1/products/*/apps/*/metrics/**
+      url: ${project.conf-man-url}/v1/products/
+#    alert--incident:
+    test:
+      id: test
+      path: /api/v1/products/*/apps/**
+      url: http://localhost:8888/products/
+
+
+
