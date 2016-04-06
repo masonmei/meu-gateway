@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <property name="APP_NAME" value="meu-gateway"/>
-
-    <include resource="log/prod.xml"/>
+    <include resource="log/dev-access.xml"/>
 
     <logger name="com.baidu.oped.sia.boot" level="INFO"/>
     <logger name="com.baidu.oped.iop.m4" level="DEBUG"/>

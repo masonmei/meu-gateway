@@ -1,5 +1,5 @@
 server:
-  port: 8888
+  port: 8868
   compression:
     enabled: true
     min-response-size: 1024
@@ -17,17 +17,19 @@ project:
     department: oped
     description: Gateway application of meu.
   uuap:
-    app-service-home: http://localhost:8888/
-    cas-service-url: http://localhost:8888/login
+    app-service-home: http://localhost:8868/
+    cas-service-url: http://localhost:8868/login
     cas-url-prefix: http://itebeta.baidu.com:8100/
     cas-url-login: http://itebeta.baidu.com:8100/login
     cas-url-logout: http://itebeta.baidu.com:8100/logout
-  user-project-info: http://localhost:8888/users
+#  user-project-info: http://hz01-noah-yanzhijie1.hz01.baidu.com:8858/users
+  user-project-info: http://localhost:8868/users
+#  conf-man-url: http://hz01-noah-yanzhijie2.hz01.baidu.com:8878
   conf-man-url: http://localhost:8878
-  service-man-url: http://localhost:8868
-  policy-status-url: http://localhost:8858
-  incident-url: http://localhost:8848
-  data-service-url: http://localhost:8838
+  service-man-url: http://hz01-noah-yanzhijie1.hz01.baidu.com:8858
+  policy-status-url: http://hz01-noah-yanzhijie2.hz01.baidu.com:8848
+  incident-url: http://hz01-noah-yanzhijie2.hz01.baidu.com:8848
+  data-service-url: http://hz01-noah-yanzhijie1.hz01.baidu.com:8807
 
 custom:
   boot:
@@ -42,6 +44,8 @@ custom:
           - /**
         api-info:
           title: meu-gateway
+    access-log:
+      enabled: true
 spring:
   redis:
     host: localhost
@@ -138,6 +142,8 @@ zuul:
       id: test
       path: /api/v1/products/*/apps/**
       url: http://localhost:8888/products/
+  add-proxy-headers: true
+
 
 
 
