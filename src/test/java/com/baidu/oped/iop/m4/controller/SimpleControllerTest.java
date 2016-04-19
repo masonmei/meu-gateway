@@ -26,7 +26,7 @@ import org.springframework.web.context.WebApplicationContext;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(value = {Application.class})
 @WebAppConfiguration
-public class ApplicationInfoControllerTest {
+public class SimpleControllerTest {
 
     @Autowired
     private WebApplicationContext context;

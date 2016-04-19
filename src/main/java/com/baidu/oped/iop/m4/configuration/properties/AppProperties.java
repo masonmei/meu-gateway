@@ -3,6 +3,7 @@ package com.baidu.oped.iop.m4.configuration.properties;
 import org.hibernate.validator.constraints.URL;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
+import org.springframework.web.cors.CorsConfiguration;
 
 /**
  * Application Propertity Configuration.
@@ -14,13 +15,23 @@ import org.springframework.stereotype.Component;
 public class AppProperties {
     @URL
     private String userProjectInfo;
+    @URL
     private String policyStatusUrl;
+    @URL
     private String incidentUrl;
+    @URL
     private String confManUrl;
+    @URL
     private String serviceManUrl;
+    @URL
     private String dataServiceUrl;
-    private AppInfo info;
-    private Uuap uuap;
+
+    @URL
+    private String homePage;
+
+    private AppInfo info = new AppInfo();
+    private Uuap uuap = new Uuap();
+    private CorsConfiguration cors = new CorsConfiguration();
 
     public String getUserProjectInfo() {
         return userProjectInfo;
@@ -70,6 +81,14 @@ public class AppProperties {
         this.dataServiceUrl = dataServiceUrl;
     }
 
+    public String getHomePage() {
+        return homePage;
+    }
+
+    public void setHomePage(String homePage) {
+        this.homePage = homePage;
+    }
+
     public AppInfo getInfo() {
         return info;
     }
@@ -86,5 +105,11 @@ public class AppProperties {
         this.uuap = uuap;
     }
 
+    public CorsConfiguration getCors() {
+        return cors;
+    }
 
+    public void setCors(CorsConfiguration cors) {
+        this.cors = cors;
+    }
 }

@@ -66,7 +66,7 @@ checkProcess()
 checkPort()
 {
     echo "enter checkPort function"
-    CHECK_PORT=`netstat -anp|grep ${MAIN_PORT}`
+    CHECK_PORT=`netstat -anp|grep ":${MAIN_PORT}" |grep LISTEN`
     if [ -n "${CHECK_PORT}" ];then
         return 0
     else

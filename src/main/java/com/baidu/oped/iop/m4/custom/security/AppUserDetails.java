@@ -3,11 +3,9 @@ package com.baidu.oped.iop.m4.custom.security;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.util.Assert;
 
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -20,12 +18,11 @@ public class AppUserDetails implements UserDetails {
 
     private int id;
     private String name;
-    @JsonProperty("zh_name")
-    private String zhName;
-    @JsonProperty("tel")
+    private String alias;
     private String telephone;
     private String email;
-    private String bdpassport;
+    private String plat;
+    private String defaultProduct;
 
     private Set<AppAuthority> roles = new HashSet<>();
 
@@ -45,12 +42,12 @@ public class AppUserDetails implements UserDetails {
         this.name = name;
     }
 
-    public String getZhName() {
-        return zhName;
+    public String getAlias() {
+        return alias;
     }
 
-    public void setZhName(String zhName) {
-        this.zhName = zhName;
+    public void setAlias(String alias) {
+        this.alias = alias;
     }
 
     public String getTelephone() {
@@ -69,12 +66,12 @@ public class AppUserDetails implements UserDetails {
         this.email = email;
     }
 
-    public String getBdpassport() {
-        return bdpassport;
+    public String getPlat() {
+        return plat;
     }
 
-    public void setBdpassport(String bdpassport) {
-        this.bdpassport = bdpassport;
+    public void setPlat(String plat) {
+        this.plat = plat;
     }
 
     public Set<AppAuthority> getRoles() {
@@ -83,6 +80,14 @@ public class AppUserDetails implements UserDetails {
 
     public void setRoles(Set<AppAuthority> roles) {
         this.roles = roles;
+    }
+
+    public String getDefaultProduct() {
+        return defaultProduct;
+    }
+
+    public void setDefaultProduct(String defaultProduct) {
+        this.defaultProduct = defaultProduct;
     }
 
     @Override

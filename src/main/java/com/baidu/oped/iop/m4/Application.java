@@ -8,15 +8,17 @@ import static com.baidu.oped.sia.boot.utils.Constrains.Profile.TEST;
 import static com.baidu.oped.sia.boot.utils.Constrains.SERVER_PORT;
 
 import com.baidu.oped.sia.boot.common.NormalizationResponseBodyAdvice;
-import com.baidu.oped.sia.boot.exception.SystemExceptionHandler;
+import com.baidu.oped.sia.boot.exception.RestSystemExceptionHandler;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.web.ErrorMvcAutoConfiguration;
-import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
+import org.springframework.cloud.netflix.feign.EnableFeignClients;
+import org.springframework.cloud.netflix.zuul.EnableZuulServer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.SimpleCommandLinePropertySource;
@@ -36,7 +38,8 @@ import javax.annotation.PostConstruct;
  */
 @SpringBootApplication(exclude = {ErrorMvcAutoConfiguration.class})
 @EnableRedisHttpSession
-@EnableZuulProxy
+@EnableZuulServer
+@EnableFeignClients
 public class Application {
     private static final Logger LOG = LoggerFactory.getLogger(Application.class);
 
@@ -89,8 +92,8 @@ public class Application {
     }
 
     @Bean
-    public SystemExceptionHandler exceptionHandler() {
-        return new SystemExceptionHandler();
+    public RestSystemExceptionHandler exceptionHandler() {
+        return new RestSystemExceptionHandler();
     }
 
     @Bean
